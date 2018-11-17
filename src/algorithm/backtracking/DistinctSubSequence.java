@@ -1,8 +1,9 @@
+package algorithm.backtracking;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DistinctSequence {
+public class DistinctSubSequence {
 
 	public static void main(String[] args) {
 		String str="a b c d";

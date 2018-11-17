@@ -61,10 +61,10 @@ public class TreeNode<T> {
 		for (int i = 0; i < depth; ++i) {
 
 			int level = (int) Math.pow(2, i);
-
+			int preSpace=0;
 			for (int j = 0; j < level; ++j) {
 
-				int preSpace = (int) ((charWidth / (Math.pow(2, (i + 1))) - 1));
+				preSpace = (int) ((charWidth / (Math.pow(2, (i + 2))) - 1));
 
 				for (int k = 0; k < preSpace; ++k) {
 
@@ -93,7 +93,45 @@ public class TreeNode<T> {
 
 			}
 
-			output += "\n\n";
+			output += "\n";
+			if (idx >= tree.size()) {
+				continue;
+			}
+			for (int j = 0; j < level; ++j) {
+
+				int x=preSpace/2 ;
+				int y=x/2;
+				x=x+y+1;
+				for (int k = 0; k < x; ++k) {
+
+					output += " ";
+
+				}
+
+				output += "/";
+
+
+				for (int k = 0; k < y; ++k) {
+
+					output += " ";
+
+				}
+				output += " ";
+				
+				for (int k = 0; k < y; ++k) {
+
+					output += " ";
+
+				}
+				output += "\\";
+				for (int k = 0; k < x; ++k) {
+
+					output += " ";
+
+				}
+				output += " ";
+			}
+			output += "\n";
 
 		}
 

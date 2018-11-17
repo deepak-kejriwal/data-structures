@@ -6,27 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TreeNode<T> {
-
-	public static void main(String[] args) {
-		TreeNode<Integer> node = new TreeNode<>(1);
-		TreeNode<Integer> left = new TreeNode<>(2);
-		TreeNode<Integer> right = new TreeNode<>(3);
-		node.left = left;
-		node.right = right;
-		TreeNode<Integer> right1 = new TreeNode<>(4);
-		TreeNode<Integer> right2 = new TreeNode<>(5);
-		right.left = right1;
-		right.right = right2;
-		left.left = right1;
-		left.right = right2;
-		TreeNode<Integer> right3 = new TreeNode<>(6);
-		TreeNode<Integer> right4 = new TreeNode<>(7);
-		right1.left = right3;
-		right1.right = right4;
-		System.out.println(node);
-
-		// System.out.println(str1);
-	}
+	private boolean enablePrettyPrint = true;
 
 	T data;
 	public TreeNode<T> left;
@@ -38,11 +18,14 @@ public class TreeNode<T> {
 
 	@Override
 	public String toString() {
-		List<Object> list = levelOrder(this);
-		return toString(list);
+		if (enablePrettyPrint) {
+			List<Object> list = levelOrder(this);
+			return toString(list);
+		}
+		return super.toString();
 	}
 
-	public String toString(List<Object> tree) {
+	private String toString(List<Object> tree) {
 
 		String output = "";
 		int depth = 0;
@@ -61,7 +44,7 @@ public class TreeNode<T> {
 		for (int i = 0; i < depth; ++i) {
 
 			int level = (int) Math.pow(2, i);
-			int preSpace=0;
+			int preSpace = 0;
 			for (int j = 0; j < level; ++j) {
 
 				preSpace = (int) ((charWidth / (Math.pow(2, (i + 2))) - 1));
@@ -99,9 +82,9 @@ public class TreeNode<T> {
 			}
 			for (int j = 0; j < level; ++j) {
 
-				int x=preSpace/2 ;
-				int y=x/2;
-				x=x+y+1;
+				int x = preSpace / 2;
+				int y = x / 2;
+				x = x + y + 1;
 				for (int k = 0; k < x; ++k) {
 
 					output += " ";
@@ -110,14 +93,13 @@ public class TreeNode<T> {
 
 				output += "/";
 
-
 				for (int k = 0; k < y; ++k) {
 
 					output += " ";
 
 				}
 				output += " ";
-				
+
 				for (int k = 0; k < y; ++k) {
 
 					output += " ";
@@ -148,7 +130,7 @@ public class TreeNode<T> {
 		// Making tree as full tree end
 	}
 
-	public List<Object> levelOrder(TreeNode<T> root) {
+	private List<Object> levelOrder(TreeNode<T> root) {
 		int count = 0;
 		List<Object> levelTraversal = new ArrayList<>();
 		if (root != null) {
@@ -171,5 +153,27 @@ public class TreeNode<T> {
 			}
 		}
 		return levelTraversal;
+	}
+
+	public static void main(String[] args) {
+		TreeNode<Integer> node = new TreeNode<>(1);
+		TreeNode<Integer> left = new TreeNode<>(2);
+		TreeNode<Integer> right = new TreeNode<>(3);
+		node.left = left;
+		node.right = right;
+		TreeNode<Integer> right1 = new TreeNode<>(4);
+		TreeNode<Integer> right2 = new TreeNode<>(5);
+		right.left = right1;
+		right.right = right2;
+		left.left = right1;
+		left.right = right2;
+		TreeNode<Integer> right3 = new TreeNode<>(6);
+		TreeNode<Integer> right4 = new TreeNode<>(7);
+		right1.left = right3;
+		right1.right = right4;
+		System.out.println("Tree Structure:\n");
+		System.out.println(node);
+		System.out.println("Level Order Structure:");
+		System.out.println(node.levelOrder(node));
 	}
 }

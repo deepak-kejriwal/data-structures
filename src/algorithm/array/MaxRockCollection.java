@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package algorithm.array;
 import java.util.Stack;
 
 /*
@@ -19,7 +18,7 @@ import java.util.Stack;
  *
  */
 
-public class SolutionSolved {
+public class MaxRockCollection {
 
 	public static void main(String[] args) {
 		Integer[][] grid1 = { { 0, 0, 0, 0, 5 }, { 0, 1, 1, 1, 0 }, { 2, 0, 0, 0, 0 } };

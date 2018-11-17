@@ -1,4 +1,4 @@
-package com.deepak;
+package com.deepak.others;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -7,6 +7,24 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+/*
+There is going to be a sale during this month. You are interested in a particular item and you found that different Vendors have different prices during different time periods. You collected the following information:
+
+
+Vendor => (start date, end date, price) both sides inclusive
+A => (1, 5, $20)
+B => (3, 6, $15)
+C => (2, 8, $25)
+D => (7, 12, $18)
+E => (1, 31, $22)
+As you can see, there are conflicting entries. You need to print out a non-conflicting schedule of prices, taking the best price from each period: 
+
+e.g. 
+(1, 2, $20), (3, 6, $15), (7, 12, $18), (13, 31, $22)
+ * 
+ * 
+ * 
+ */
 public class VendorInterval {
 
 	public static void main(String[] args) {

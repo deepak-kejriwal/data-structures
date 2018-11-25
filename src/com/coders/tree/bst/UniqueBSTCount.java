@@ -1,4 +1,4 @@
-package com.deepak.tree.bst;
+package com.coders.tree.bst;
 
 import java.util.Map;
 import java.util.stream.Collectors;

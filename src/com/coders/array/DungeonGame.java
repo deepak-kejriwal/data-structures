@@ -1,4 +1,4 @@
-package com.deepak.array;
+package com.coders.array;
 
 /*
  * 

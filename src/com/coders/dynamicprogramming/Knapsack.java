@@ -1,4 +1,4 @@
-package com.deepak.dynamicprogramming;
+package com.coders.dynamicprogramming;
 
 import java.util.ArrayList;
 import java.util.List;

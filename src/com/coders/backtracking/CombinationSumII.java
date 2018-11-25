@@ -1,4 +1,4 @@
-package com.deepak.backtracking;
+package com.coders.backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;

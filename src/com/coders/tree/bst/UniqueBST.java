@@ -1,9 +1,9 @@
-package com.deepak.tree.bst;
+package com.coders.tree.bst;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.deepak.tree.TreeNode;
+import com.coders.tree.TreeNode;
 
 /*
  * 

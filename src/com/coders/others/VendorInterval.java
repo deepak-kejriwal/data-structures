@@ -1,4 +1,4 @@
-package com.deepak.others;
+package com.coders.others;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

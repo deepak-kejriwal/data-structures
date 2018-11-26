@@ -8,7 +8,7 @@ import java.util.List;
 public class TreeNode<T> {
 	private boolean enablePrettyPrint = true;
 
-	T data;
+	public T data;
 	public TreeNode<T> left;
 	public TreeNode<T> right;
 

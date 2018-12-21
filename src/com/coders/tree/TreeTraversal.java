@@ -6,7 +6,7 @@ import java.util.Stack;
 
 /**
 * 
-* @author deepak1037
+* @author Deepak Kejriwal
 *
 */
 public class TreeTraversal {

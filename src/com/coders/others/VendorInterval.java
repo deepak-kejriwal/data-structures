@@ -1,5 +1,9 @@
 package com.coders.others;
-
+/**
+* 
+* @author Deepak Kejriwal
+*
+*/
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,10 +32,11 @@ e.g.
 public class VendorInterval {
 
 	public static void main(String[] args) {
-		new VendorInterval().test();
+		// new VendorInterval().test1();
+		new VendorInterval().test2();
 	}
 
-	public void test() {
+	public void test1() {
 		Interval v1 = new Interval(1, 5, 28);
 		Interval v2 = new Interval(3, 7, 15);
 		Interval v3 = new Interval(6, 12, 8);
@@ -39,11 +44,70 @@ public class VendorInterval {
 		vendors.add(v1);
 		vendors.add(v2);
 		vendors.add(v3);
-		vendors = minimumPriceIntervals(vendors);
-		System.out.println(vendors);
+		List<Interval> result = minimumPriceIntervals1(vendors);
+		System.out.println(result);
+		result = minimumPriceIntervals2(vendors);
+		System.out.println(result);
 	}
 
-	public List<Interval> minimumPriceIntervals(List<Interval> vendors) {
+	public void test2() {
+		Interval v1 = new Interval(1, 5, 20);
+		Interval v2 = new Interval(3, 6, 15);
+		Interval v3 = new Interval(2, 8, 25);
+		Interval v4 = new Interval(7, 12, 18);
+		Interval v5 = new Interval(1, 31, 22);
+		List<Interval> vendors = new ArrayList<>();
+		vendors.add(v1);
+		vendors.add(v2);
+		vendors.add(v3);
+		vendors.add(v4);
+		vendors.add(v5);
+		List<Interval> result = minimumPriceIntervals1(vendors);
+		System.out.println(result);
+		result = minimumPriceIntervals2(vendors);
+		System.out.println(result);
+		// Difference between above 2 result seen below
+		// [[1,2,20], [3,6,15], [7,12,18], [13,31,22]]
+		// [[1,3,20], [3,6,15], [6,7,22], [7,12,18], [12,31,22]]
+	}
+
+	// This is for interval like date where there is no in-between date between say 2 and 3
+	private List<Interval> minimumPriceIntervals1(List<Interval> vendors) {
+		List<Interval> output = new LinkedList<>();
+		Map<Integer, Integer> map = new TreeMap<>();
+		for (Interval v : vendors) {
+			int start = v.startTime;
+			int end = v.endTime;
+			int price = v.price;
+			for (int i = start; i <= end; i++) {
+				//Interval key = new Interval(i, i + 1, price);
+				if (map.getOrDefault(i, Integer.MAX_VALUE) > price) {
+					map.put(i, price);
+				}
+			}
+		}
+		
+		int prevPrice = Integer.MAX_VALUE;
+		int start = 0;
+		int end = 0;
+		for (Entry<Integer, Integer> entry : map.entrySet()) {
+			 int price=entry.getValue();
+			 if(price!=prevPrice) {
+				 output.add(new Interval(start,end,prevPrice));
+				 prevPrice=price;
+				 start=entry.getKey();
+				 end=start;
+			 }else {
+				 end=entry.getKey();
+			 }
+		}
+		output.add(new Interval(start, end, prevPrice));
+		output.remove(0);
+		return output;
+	}
+
+	// This is for interval like time where there is in-between time between say 2 and 3
+	public List<Interval> minimumPriceIntervals2(List<Interval> vendors) {
 
 		List<Interval> output = new LinkedList<>();
 		Map<Interval, Integer> map = new TreeMap<>((v1, v2) -> Integer.compare(v1.startTime, v2.startTime));
@@ -52,6 +116,7 @@ public class VendorInterval {
 			int start = v.startTime;
 			int end = v.endTime;
 			int price = v.price;
+			//Difference is in for loop condition only, rest code is same as above
 			for (int i = start; i < end; i++) {
 				Interval key = new Interval(i, i + 1, price);
 				if (map.getOrDefault(key, Integer.MAX_VALUE) > price) {
@@ -76,19 +141,6 @@ public class VendorInterval {
 		}
 		output.add(new Interval(start, end, prevPrice));
 		output.remove(0);
-		return output;
-	}
-
-	private List<Interval> minimumPriceIntervals1(List<Interval> vendors) {
-		vendors.sort((v1, v2) -> Integer.compare(v1.startTime, v2.startTime));
-		List<Interval> output = new ArrayList<>();
-
-		Interval first = vendors.get(0);
-		Interval second = null;
-		for (int i = 1; i < vendors.size(); i++) {
-			second = vendors.get(i);
-
-		}
 		return output;
 	}
 

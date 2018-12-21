@@ -1,18 +1,10 @@
 package com.coders.backtracking;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class DistinctSubSequence {
 
 	public static void main(String[] args) {
-		String str="a b c d";
-		System.out.println(str.split(" ", 2)[1]);
-		List<Integer> list=new ArrayList<>();
-		Integer[] a=new Integer[] {1,2,3};
-		list=Arrays.asList(a);
-		System.out.println();
-		//System.out.println(distinctSubseqII("aba"));
+		System.out.println(distinctSubseqII("aba"));
 
 	}
     public static int distinctSubseqII(String S) {

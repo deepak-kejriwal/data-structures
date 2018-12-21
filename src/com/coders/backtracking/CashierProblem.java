@@ -1,5 +1,9 @@
 package com.coders.backtracking;
-
+/**
+ * 
+ * @author Deepak Kejriwal
+ *
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,11 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * 
- * @author deepak1037
- *
- */
+
 public class CashierProblem {
 	private static Map<Integer, Set<List<Integer>>> dp = new HashMap<>();
 

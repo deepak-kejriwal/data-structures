@@ -1,14 +1,13 @@
 package com.coders.tree;
-
+/**
+ * 
+ * @author Deepak Kejriwal
+ *
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-/**
-* 
-* @author Deepak Kejriwal
-*
-*/
 public class TreeTraversal {
     public List < Integer > inorderTraversal(TreeNode<Integer> root) {
         List < Integer > res = new ArrayList < > ();

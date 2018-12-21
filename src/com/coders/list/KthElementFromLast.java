@@ -1,5 +1,9 @@
 package com.coders.list;
-
+/**
+ * 
+ * @author Deepak Kejriwal
+ *
+ */
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,11 +12,6 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
-/**
- * 
- * @author Deepak Kejriwal
- *
- */
 public class KthElementFromLast {
 	private static int N = 25;
 

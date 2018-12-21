@@ -1,15 +1,14 @@
 package com.coders.list;
-
+/**
+ * 
+ * @author Deepak Kejriwal
+ *
+ */
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
-* 
-* @author Deepak Kejriwal
-*
-*/
 public class ListNode<T> {
 	public T data;
 	public ListNode<T> next;

@@ -1,5 +1,9 @@
 package com.coders.array;
-
+/**
+* 
+* @author Deepak Kejriwal
+*
+*/
 public class MedianTwoSortedArray {
 
 	public static void main(String[] args) {

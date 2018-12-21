@@ -1,4 +1,9 @@
 package com.coders.array;
+/**
+* 
+* @author Deepak Kejriwal
+*
+*/
 import java.util.Stack;
 
 /*

@@ -1,4 +1,9 @@
 package com.coders.backtracking;
+/**
+ * 
+ * @author Deepak Kejriwal
+ *
+ */
 import java.util.Arrays;
 
 public class DistinctSubSequence {

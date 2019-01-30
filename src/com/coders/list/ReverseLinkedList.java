@@ -9,20 +9,20 @@ public class ReverseLinkedList {
 
 	public static void main(String[] args) {
 		ListNode<Integer> list = ListNode.createRandomLinkedList(10);
-		System.out.println(list.toDataOnlyString());
-		
+		System.out.println("Original List:    	    " + list.toDataOnlyString());
+
 		ListNode<Integer> reverseList = reverse(list);
-		System.out.println(reverseList.toDataOnlyString());
-		
+		System.out.println("Reversed List:    	    " + reverseList.toDataOnlyString());
+
 		list = reverse(reverseList);
-		reverseList = reverse(list,1,10);
-		System.out.println(reverseList.toDataOnlyString());
-		
-		list = reverse(reverseList);
-		System.out.println(reverseKInterval(list, 4).toDataOnlyString());
+		reverseList = reverse(list, 4, 12);
+		System.out.println("Reversed SubList: 	    " + reverseList.toDataOnlyString());
+
+		list = reverse(reverseList, 4, 12);
+		System.out.println("Reversed K=4 interval List: " + reverseKInterval(list, 4).toDataOnlyString());
 	}
 
-	//Reverse a single linked list
+	// Reverse a single linked list
 	private static ListNode<Integer> reverse(ListNode<Integer> head) {
 		if (head == null)
 			return null;
@@ -35,11 +35,9 @@ public class ReverseLinkedList {
 		}
 		return head;
 	}
-	//Reverse a single linked list at every K interval
+
+	// Reverse a single linked list at every K interval
 	private static ListNode<Integer> reverseKInterval(ListNode<Integer> node, int k) {
-
-		boolean headFound = false;
-
 		ListNode<Integer> tail = new ListNode<>(0, null);
 		ListNode<Integer> dummyHead = new ListNode<>(0, tail);
 
@@ -53,44 +51,41 @@ public class ReverseLinkedList {
 				subHead = tmp;
 				count++;
 			}
-			//if list size is smaller than K leave it unchanged, hence calling reverse to reverse subHead to original subhead.
+			// if sublist size is smaller than K leave it unchanged, hence calling reverse
+			// to reverse subHead to original subhead.
 			if (count != k && subHead.next != null) {
 				subHead = reverseKInterval(subHead, count);
 			}
-			if (!headFound) {
-				dummyHead.next = subHead;
-				tail = node;
-				headFound = true;
-			} else {
-				tail.next = subHead;
-				tail = node;
-			}
+			tail.next = subHead;
+			tail = node;
+			//node is pointing to last element of sublist. Hence node.next points to head of new sublist.
 			if (node != null) {
 				node = node.next;
 			}
 		}
 
-		return dummyHead.next;
+		return dummyHead.next.next;
 	}
-	
-	//Reverse a single linked sublist in given range
-	private static ListNode<Integer> reverse(ListNode<Integer> head,int start, int end) {
-		
-		
+
+	// Reverse a single linked sublist in given range
+	private static ListNode<Integer> reverse(ListNode<Integer> head, int start, int end) {
+
 		if (head == null)
 			return null;
 		ListNode<Integer> dummyHead = new ListNode<>(0, head);
-		int count=1;
-		while(head!=null&&count<start) {
-			head=head.next;
+		ListNode<Integer> prevHead = dummyHead;
+		int count = 1;
+		while (head != null && count++ < start) {
+			head = head.next;
+			prevHead = prevHead.next;
 		}
 		ListNode<Integer> node = head;
-		while (node.next != null&&(start++<end)) {
+		while (node.next != null && (start++ < end)) {
 			ListNode<Integer> tmp = node.next;
 			node.next = tmp.next;
 			tmp.next = head;
 			head = tmp;
-			dummyHead.next=head;
+			prevHead.next = head;
 		}
 		return dummyHead.next;
 	}

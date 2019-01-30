@@ -51,6 +51,7 @@ public class VendorInterval {
 	}
 
 	public void test2() {
+		//Interval v0 = new Interval(1, 1, 5);
 		Interval v1 = new Interval(1, 5, 20);
 		Interval v2 = new Interval(3, 6, 15);
 		Interval v3 = new Interval(2, 8, 25);
@@ -62,6 +63,7 @@ public class VendorInterval {
 		vendors.add(v3);
 		vendors.add(v4);
 		vendors.add(v5);
+		//vendors.add(v0);
 		List<Interval> result = minimumPriceIntervals1(vendors);
 		System.out.println(result);
 		result = minimumPriceIntervals2(vendors);
@@ -93,7 +95,9 @@ public class VendorInterval {
 		for (Entry<Integer, Integer> entry : map.entrySet()) {
 			 int price=entry.getValue();
 			 if(price!=prevPrice) {
-				 output.add(new Interval(start,end,prevPrice));
+				 if(prevPrice!=Integer.MAX_VALUE) {
+					 output.add(new Interval(start,end,prevPrice)); 
+				 }
 				 prevPrice=price;
 				 start=entry.getKey();
 				 end=start;
@@ -102,7 +106,7 @@ public class VendorInterval {
 			 }
 		}
 		output.add(new Interval(start, end, prevPrice));
-		output.remove(0);
+		//output.remove(0);
 		return output;
 	}
 

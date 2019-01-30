@@ -21,7 +21,7 @@ public class ListNode<T> {
 		return "[data=" + data + ", next=" + next + "]";
 	}
 	public String toDataOnlyString() {
-		return data + ", " + (next!=null?next.toDataOnlyString():null);
+		return data + (next!=null?", ":"") + (next!=null?next.toDataOnlyString():"");
 	}
 	public static ListNode<Integer> createRandomLinkedList(int elementCount){
 		List<Integer> list= IntStream.rangeClosed(1, elementCount).boxed().collect(Collectors.toList());

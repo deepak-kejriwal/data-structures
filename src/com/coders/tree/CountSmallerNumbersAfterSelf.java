@@ -13,7 +13,7 @@ import java.util.Map;
 public class CountSmallerNumbersAfterSelf {
 
 	public static void main(String[] args) {
-		int[] nums=new int[] {4,3,2,1};
+		int[] nums=new int[] {3,4,2,1};
 		CountSmallerNumbersAfterSelf cs=new CountSmallerNumbersAfterSelf();
 		System.out.println(cs.countSmaller(nums));
 

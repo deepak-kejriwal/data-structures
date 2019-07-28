@@ -1,4 +1,5 @@
 package com.coders.others;
+
 /**
 * 
 * @author Deepak Kejriwal
@@ -9,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Stack;
 import java.util.TreeMap;
 
 /*
@@ -51,7 +53,7 @@ public class VendorInterval {
 	}
 
 	public void test2() {
-		//Interval v0 = new Interval(1, 1, 5);
+		// Interval v0 = new Interval(1, 1, 5);
 		Interval v1 = new Interval(1, 5, 20);
 		Interval v2 = new Interval(3, 6, 15);
 		Interval v3 = new Interval(2, 8, 25);
@@ -63,17 +65,22 @@ public class VendorInterval {
 		vendors.add(v3);
 		vendors.add(v4);
 		vendors.add(v5);
-		//vendors.add(v0);
+		// vendors.add(v0);
 		List<Interval> result = minimumPriceIntervals1(vendors);
 		System.out.println(result);
-		result = minimumPriceIntervals2(vendors);
+		// result = minimumPriceIntervals2(vendors);
+		// System.out.println(result);
+		result = minimumPriceIntervals3(vendors);
+		System.out.println(result);
+		result = minimumPriceIntervals4(vendors);
 		System.out.println(result);
 		// Difference between above 2 result seen below
 		// [[1,2,20], [3,6,15], [7,12,18], [13,31,22]]
 		// [[1,3,20], [3,6,15], [6,7,22], [7,12,18], [12,31,22]]
 	}
 
-	// This is for interval like date where there is no in-between date between say 2 and 3
+	// This is for interval like date where there is no in-between date between say
+	// 2 and 3
 	private List<Interval> minimumPriceIntervals1(List<Interval> vendors) {
 		List<Interval> output = new LinkedList<>();
 		Map<Integer, Integer> map = new TreeMap<>();
@@ -82,35 +89,36 @@ public class VendorInterval {
 			int end = v.endTime;
 			int price = v.price;
 			for (int i = start; i <= end; i++) {
-				//Interval key = new Interval(i, i + 1, price);
+				// Interval key = new Interval(i, i + 1, price);
 				if (map.getOrDefault(i, Integer.MAX_VALUE) > price) {
 					map.put(i, price);
 				}
 			}
 		}
-		
+
 		int prevPrice = Integer.MAX_VALUE;
 		int start = 0;
 		int end = 0;
 		for (Entry<Integer, Integer> entry : map.entrySet()) {
-			 int price=entry.getValue();
-			 if(price!=prevPrice) {
-				 if(prevPrice!=Integer.MAX_VALUE) {
-					 output.add(new Interval(start,end,prevPrice)); 
-				 }
-				 prevPrice=price;
-				 start=entry.getKey();
-				 end=start;
-			 }else {
-				 end=entry.getKey();
-			 }
+			int price = entry.getValue();
+			if (price != prevPrice) {
+				if (prevPrice != Integer.MAX_VALUE) {
+					output.add(new Interval(start, end, prevPrice));
+				}
+				prevPrice = price;
+				start = entry.getKey();
+				end = start;
+			} else {
+				end = entry.getKey();
+			}
 		}
 		output.add(new Interval(start, end, prevPrice));
-		//output.remove(0);
+		// output.remove(0);
 		return output;
 	}
 
-	// This is for interval like time where there is in-between time between say 2 and 3
+	// This is for interval like time where there is in-between time between say 2
+	// and 3
 	public List<Interval> minimumPriceIntervals2(List<Interval> vendors) {
 
 		List<Interval> output = new LinkedList<>();
@@ -120,7 +128,7 @@ public class VendorInterval {
 			int start = v.startTime;
 			int end = v.endTime;
 			int price = v.price;
-			//Difference is in for loop condition only, rest code is same as above
+			// Difference is in for loop condition only, rest code is same as above
 			for (int i = start; i < end; i++) {
 				Interval key = new Interval(i, i + 1, price);
 				if (map.getOrDefault(key, Integer.MAX_VALUE) > price) {
@@ -148,6 +156,77 @@ public class VendorInterval {
 		return output;
 	}
 
+	private List<Interval> minimumPriceIntervals3(List<Interval> vendors) {
+		List<Point> points = new ArrayList<>();
+		for (Interval v : vendors) {
+			int start = v.startTime;
+			int end = v.endTime;
+			int price = v.price;
+			points.add(new Point(start, price, true));
+			points.add(new Point(end, price, false));
+		}
+		points.sort((p1, p2) -> Integer.compare(p1.point, p2.point));
+		int stpoint = points.get(0).point;
+		int price = points.get(0).price;
+		boolean start = points.get(0).start;
+		int count = 1;
+		List<Interval> output = new LinkedList<>();
+		for (int i = 1; i < points.size() - 1; i++) {
+			if (points.get(i).price < price) {
+				output.add(new Interval(stpoint, points.get(i).point - 1, price));
+				stpoint = points.get(i).point;
+				price = points.get(i).price;
+			} else if (points.get(i).price == price && !points.get(i).start) {
+				output.add(new Interval(stpoint, points.get(i).point, price));
+				stpoint = points.get(i).point + 1;
+				price = points.get(i + 1).price;
+			}
+		}
+		output.add(new Interval(stpoint, points.get(points.size() - 1).point, price));
+		return output;
+	}
+
+	private List<Interval> minimumPriceIntervals4(List<Interval> vendors) {
+		List<Point> points = new ArrayList<>();
+		for (Interval v : vendors) {
+			int start = v.startTime;
+			int end = v.endTime;
+			int price = v.price;
+			points.add(new Point(start, price, true));
+			points.add(new Point(end, price, false));
+		}
+		points.sort((p1, p2) -> Integer.compare(p1.point, p2.point));
+		int stpoint = points.get(0).point;
+		int price = points.get(0).price;
+		boolean start = points.get(0).start;
+		int count = 1;
+		List<Interval> output = new LinkedList<>();
+		Stack<Integer> stk=new Stack<>();
+		//stk.push(price);
+		for (int i = 1; i < points.size() - 1; i++) {
+			if (points.get(i).start) {
+				if (points.get(i).price < price) {
+					stk.push(price);
+					if(points.get(i).point!=stpoint) {
+						output.add(new Interval(stpoint, points.get(i).point - 1, price));
+					}
+					
+					stpoint = points.get(i).point;
+					price = points.get(i).price;
+					
+				}
+			}else {
+				if (points.get(i).price == price) {
+					output.add(new Interval(stpoint, points.get(i).point, price));
+					stpoint = points.get(i).point + 1;
+					price = stk.isEmpty()?Integer.MAX_VALUE:stk.pop();
+				}
+			}
+		}
+		output.add(new Interval(stpoint, points.get(points.size() - 1).point, price));
+		return output;
+	}
+
 	class Interval {
 		int startTime;
 		int endTime;
@@ -162,6 +241,23 @@ public class VendorInterval {
 		@Override
 		public String toString() {
 			return "[" + startTime + "," + endTime + "," + price + "]";
+		}
+	}
+
+	class Point {
+		public int point;
+		public int price;
+		public boolean start;
+
+		public Point(int point, int price, boolean start) {
+			this.point = point;
+			this.price = price;
+			this.start = start;
+		}
+
+		@Override
+		public String toString() {
+			return "[" + point + "," + price + "," + start + "]";
 		}
 	}
 

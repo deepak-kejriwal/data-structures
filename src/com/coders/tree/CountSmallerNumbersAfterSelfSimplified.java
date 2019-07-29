@@ -3,13 +3,14 @@ package com.coders.tree;
 /**
  * 
  * @author Deepak Kejriwal
+ * 
+ * @reference https://www.hackerearth.com/practice/data-structures/advanced-data-structures/fenwick-binary-indexed-trees/tutorial/
  *
  */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,7 @@ public class CountSmallerNumbersAfterSelfSimplified {
 		return result;
 	}
 
+
 	private int sumBit(int[] bit, int index) {
 		int sum = 0;
 		for (int i = index; i > 0; i -= (i & (-i))) {
@@ -55,8 +57,7 @@ public class CountSmallerNumbersAfterSelfSimplified {
 		for (int i = index; i < bit.length; i += (i & (-i))) {
 			bit[i] += diff;
 		}
-	}
-
+	}
 	private int sum(int[] bit, int index) {
 		// System.out.println(index);
 		int s = 0;
@@ -72,6 +73,7 @@ public class CountSmallerNumbersAfterSelfSimplified {
 		// System.out.println(index+":"+value);
 		bit[index] += value;
 	}
+
 
 
 	private int[] reverse(int[] nums) {

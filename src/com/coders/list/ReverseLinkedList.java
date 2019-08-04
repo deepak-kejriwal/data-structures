@@ -11,10 +11,10 @@ public class ReverseLinkedList {
 		ListNode<Integer> list = ListNode.createRandomLinkedList(10);
 		System.out.println("Original List:    	    " + list.toDataOnlyString());
 
-		ListNode<Integer> reverseList = reverse(list);
+		ListNode<Integer> reverseList = reverseApproach1(list);
 		System.out.println("Reversed List:    	    " + reverseList.toDataOnlyString());
 
-		list = reverse(reverseList);
+		list = reverseApproach1(reverseList);
 		reverseList = reverse(list, 4, 12);
 		System.out.println("Reversed SubList: 	    " + reverseList.toDataOnlyString());
 
@@ -23,7 +23,7 @@ public class ReverseLinkedList {
 	}
 
 	// Reverse a single linked list
-	private static ListNode<Integer> reverse(ListNode<Integer> head) {
+	private static ListNode<Integer> reverseApproach1(ListNode<Integer> head) {
 		if (head == null)
 			return null;
 		ListNode<Integer> node = head;
@@ -34,6 +34,20 @@ public class ReverseLinkedList {
 			head = tmp;
 		}
 		return head;
+	}
+	
+	// Reverse a single linked list
+	private static ListNode<Integer> reverseApproach2(ListNode<Integer> head) {
+		ListNode<Integer> prev=null;
+		ListNode<Integer> curr=head;
+
+		while (curr!= null) {
+			ListNode<Integer> tmp = curr.next;
+			curr.next = prev;
+			prev=curr;
+			curr=tmp;
+		}
+		return prev;
 	}
 
 	// Reverse a single linked list at every K interval

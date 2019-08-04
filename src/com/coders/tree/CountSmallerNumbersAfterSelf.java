@@ -13,7 +13,7 @@ import java.util.Map;
 public class CountSmallerNumbersAfterSelf {
 
 	public static void main(String[] args) {
-		int[] nums=new int[] {3,4,2,1};
+		int[] nums=new int[] {8,7,5,6};
 		CountSmallerNumbersAfterSelf cs=new CountSmallerNumbersAfterSelf();
 		System.out.println(cs.countSmaller(nums));
 
@@ -36,10 +36,11 @@ public class CountSmallerNumbersAfterSelf {
 		int[] bit = new int[nums.length + 1];
 
 		for (int i = 0; i < nums.length; i++) {
-			int count = getSum(bit, map.get(nums[i]) - 1);
+			int count = getSum2(bit, map.get(nums[i]) - 1);
 			res.add(0, count);
-			update(bit, map.get(nums[i]), 1);
+			update2(bit, map.get(nums[i]), 1);
 		}
+
 		return res;
 	}
 
@@ -56,7 +57,16 @@ public class CountSmallerNumbersAfterSelf {
 			bit[i] += diff;
 		}
 	}
-
+	private int getSum2(int[] bit, int index) {
+		int sum = 0;
+		for (int i = index + 1; i > 0; i --) {
+			sum += bit[i];
+		}
+		return sum;
+	}
+	private void update2(int[] bit, int index, int diff) {		
+			bit[index + 1] = diff;
+	}
 	private int[] reverse(int[] nums) {
 		int[] res = new int[nums.length];
 		for (int i = 0; i < nums.length; i++) {

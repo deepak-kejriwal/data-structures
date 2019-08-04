@@ -17,7 +17,6 @@ public class CombinationSumII {
 	}
 
 	public Set<List<Integer>> combinationSum2(int[] candidates, int target) {
-		String v360s;
 		Arrays.sort(candidates);
 		int len = Arrays.binarySearch(candidates, target);
 		len = Math.min(Math.abs(len), candidates.length);

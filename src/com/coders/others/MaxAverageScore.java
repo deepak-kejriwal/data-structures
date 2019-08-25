@@ -40,7 +40,7 @@ public class MaxAverageScore {
 		Stream<String[]> st=Arrays.stream(input);
 		Map<String,Double> map=st.collect(Collectors.groupingBy(
 				record->record[0],Collectors.averagingDouble(record->Double.parseDouble(record[1]))));
-		Double d=map.values().stream().mapToDouble(x->x).max().getAsDouble();
+		Double d=map.values().stream().mapToDouble(x->x).max().getAsDouble();//.orElseGet(()->0);
 		System.out.println(map);
 		return (int)Math.floor(d);		
 	}

@@ -1,4 +1,4 @@
-package com.coders.array;
+package com.coders.dynamicprogramming;
 /**
 * 
 * @author Deepak Kejriwal

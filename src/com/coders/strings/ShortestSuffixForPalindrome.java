@@ -13,8 +13,9 @@ public class ShortestSuffixForPalindrome {
 		//String input = "boof";
 		//String input = "madcda";
 		//String input = "adcda";
-		String input = "madcdat";
+		//String input = "madcdat";
 		//String input = "mcaabaa";
+		String input = "abcdcb";
 		System.out.println("Output:" + ssfp.suffixKMP(input));
 	}
 

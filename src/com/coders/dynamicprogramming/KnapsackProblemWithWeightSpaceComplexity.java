@@ -1,4 +1,5 @@
 package com.coders.dynamicprogramming;
+
 /**
  * 
  * @author Deepak Kejriwal
@@ -6,33 +7,20 @@ package com.coders.dynamicprogramming;
  */
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class Knapsack {
-	
+public class KnapsackProblemWithWeightSpaceComplexity {
+
 	public int logic(List<Clock> list, int gcapacity) {
-		int[] cache = new int[gcapacity + 1];
+		int[] dp = new int[gcapacity + 1];
 		for (int i = 0; i < list.size(); i++) {
 			Clock clock = list.get(i);
 			for (int capacity = gcapacity; capacity >= 0; capacity--) {
-				//if (i == -1) {
-				//	if (capacity >= clock.weight) {
-				//		cache[capacity] = clock.value;
-				//	} else {
-				//		cache[capacity] = 0;
-				//	}
-				//} else {
-					List<Integer> lis = Stream.of(capacity, capacity - clock.weight).collect(Collectors.toList());
-					lis = lis.stream().map(c -> c >= 0 ? cache[c] : -1).collect(Collectors.toList());
-					if (lis.get(1) != -1) {
-						lis.set(1, lis.get(1) + clock.value);
-					} 
-					cache[capacity] = lis.stream().mapToInt(x -> x).max().getAsInt();
-				//}
+				if (capacity - clock.weight >= 0) {
+					dp[capacity] = Math.max(dp[capacity], dp[capacity - clock.weight] + clock.value);
+				}
 			}
 		}
-		return cache[gcapacity];
+		return dp[gcapacity];
 	}
 
 	public class Clock {
@@ -44,9 +32,9 @@ public class Knapsack {
 			this.weight = weight;
 		}
 	}
-	
+
 	public static void main(String[] args) {
-		new Knapsack().test();
+		new KnapsackProblemWithWeightSpaceComplexity().test();
 	}
 
 	public void test() {

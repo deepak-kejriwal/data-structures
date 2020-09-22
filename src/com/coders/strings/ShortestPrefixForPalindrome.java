@@ -1,14 +1,14 @@
 package com.coders.strings;
 
-public class ShortestPalindrome {
+public class ShortestPrefixForPalindrome {
 
 	public static void main(String[] args) {
-		ShortestPalindrome ssfp = new ShortestPalindrome();
+		ShortestPrefixForPalindrome ssfp = new ShortestPrefixForPalindrome();
 		// String input = "mmmmmabmmmmm";
 		// String input = "boof";
 		// String input = "madcda";
 		// String input = "adcda";
-		String input = "madcdat";
+		String input = "adcdats";
 		// String input = "mcaabaa";
 		System.out.println("Output:" + ssfp.shortestPalindromeKMP(input));
 	}

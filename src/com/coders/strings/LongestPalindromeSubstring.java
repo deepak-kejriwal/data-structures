@@ -160,9 +160,19 @@ public class LongestPalindromeSubstring {
     public static void main(String args[]) {
         LongestPalindromeSubstring lps = new LongestPalindromeSubstring();
         System.out.println(lps.longestPalindromicSubstringLinear("abba".toCharArray()));
+        System.out.println(lps.longestPalindromicSubstringLinear("abba"));
         System.out.println(lps.longestPalindromicSubstringLinear("abbababba".toCharArray()));
+        System.out.println(lps.longestPalindromicSubstringLinear("abbababba"));
         System.out.println(lps.longestPalindromicSubstringLinear("babcbaabcbaccba".toCharArray()));
+        System.out.println(lps.longestPalindromicSubstringLinear("babcbaabcbaccba"));
         System.out.println(lps.longestPalindromicSubstringLinear("cdbabcbabdab".toCharArray()));
+        System.out.println(lps.longestPalindromicSubstringLinear("cdbabcbabdab"));
     }
 
+	private String longestPalindromicSubstringLinear(String input) {
+		KMP kmp = new KMP();
+		int[] prefix = kmp.prefixTable(input + "#" + new StringBuilder(input).reverse().toString());
+		int lengthOfLongestPalindrome = prefix[prefix.length - 1];
+		return new StringBuilder(input.substring(0, lengthOfLongestPalindrome)).toString();
+	}
 }

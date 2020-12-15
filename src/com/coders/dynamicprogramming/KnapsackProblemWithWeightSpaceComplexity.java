@@ -11,7 +11,9 @@ import java.util.List;
 public class KnapsackProblemWithWeightSpaceComplexity {
 
 	public int logic(List<Clock> list, int gcapacity) {
+		
 		int[] dp = new int[gcapacity + 1];
+		
 		for (int i = 0; i < list.size(); i++) {
 			Clock clock = list.get(i);
 			for (int capacity = gcapacity; capacity >= 0; capacity--) {
@@ -20,6 +22,7 @@ public class KnapsackProblemWithWeightSpaceComplexity {
 				}
 			}
 		}
+		
 		return dp[gcapacity];
 	}
 

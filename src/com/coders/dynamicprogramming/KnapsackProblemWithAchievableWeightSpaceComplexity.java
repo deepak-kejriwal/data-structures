@@ -8,6 +8,7 @@ package com.coders.dynamicprogramming;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.TreeSet;
 public class KnapsackProblemWithAchievableWeightSpaceComplexity {
 
 	public int logic(List<Clock> list, int gcapacity) {
-		List<Integer> reverseKey = subsets(list, gcapacity);
+		List<Integer> reverseKey = subsets2(list, gcapacity);
 		
 		Map<Integer, Integer> dp = new HashMap<>();
 		
@@ -40,6 +41,25 @@ public class KnapsackProblemWithAchievableWeightSpaceComplexity {
 			}
 		}
 		return dp.get(reverseKey.get(0));
+	}
+	
+	public List<Integer> subsets2(List<Clock> clocks, int capacity) {
+		int mask = (1<<clocks.size());
+		List<Integer> list = new ArrayList<>();
+		for(int i=0; i<mask; ++i) {
+			char[] binary = Integer.toBinaryString(i).toCharArray();
+			int ncapacity = 0;
+			for(int j=binary.length-1; j>=0; --j) {
+				int k = binary.length-j;
+				ncapacity =ncapacity +  (binary[j]-'0') * clocks.get(k-1).weight;
+			}
+			if(capacity>=ncapacity) {
+				list.add(ncapacity);
+			}
+		}
+		list = new ArrayList<>(new HashSet<>(list));
+		list.sort(Collections.reverseOrder());
+		return list;
 	}
 
 	public List<Integer> subsets(List<Clock> clocks, int capacity) {
